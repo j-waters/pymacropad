@@ -2,11 +2,7 @@ from enum import Enum
 from typing import Callable, List, Set
 
 import libevdev
-from evdev import InputDevice, ecodes
-from select import select
-from subprocess import Popen
 from os import path
-from time import sleep
 
 from libevdev import InputEvent
 
