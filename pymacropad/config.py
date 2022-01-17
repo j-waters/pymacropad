@@ -1,10 +1,10 @@
 import os
-from typing import Dict
 from pathlib import Path
 from shutil import copyfile
-from xdg import BaseDirectory
+from typing import Dict
 
 import yaml
+from xdg import BaseDirectory
 
 from pymacropad.daemon import KeyEvent, KeyState
 
@@ -57,8 +57,12 @@ class Config:
                 data = yaml.safe_load(f)
             self._last_modified = os.path.getmtime(self.config_location)
 
-            self._key_configs = {k: KeyConfig(k, v) for k, v in data.get('keys', {}).items()}
+            self._key_configs = {k: self._build_key_config(k, v) for k, v in data.get('keys', {}).items()}
             self._device_id = data.get('device_id')
+
+    @classmethod
+    def _build_key_config(cls, key: str, data: dict):
+        return KeyConfig(key, data)
 
     @property
     def key_configs(self):
