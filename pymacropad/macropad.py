@@ -5,7 +5,7 @@ from .daemon import Daemon, KeyEvent
 
 
 def start():
-    config = Config(use_default=True)
+    config = Config()
 
     def handle(event: KeyEvent):
         print(f"Handling key: {event.key}, state: {event.state.name}")
