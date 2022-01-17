@@ -1,0 +1,4 @@
+libevdev
+PyYaml
+Click
+pyxdg
