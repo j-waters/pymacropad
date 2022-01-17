@@ -8,7 +8,7 @@ def start():
     config = Config(use_default=True)
 
     def handle(event: KeyEvent):
-        print(f"Handling key: {event.key}, state: {event.state}")
+        print(f"Handling key: {event.key}, state: {event.state.name}")
         command = config.get_command(event)
         if command is not None:
             Popen(command, shell=True)
