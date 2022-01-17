@@ -53,7 +53,6 @@ class Daemon:
 
     def _handle(self, event: InputEvent):
         key_event = KeyEvent.from_event(event, self.device_id)
-        print(f"Handling key: {key_event.key}, state: {key_event.state}")
 
         for handler in self.handlers:
             handler(key_event)
