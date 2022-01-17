@@ -5,6 +5,7 @@ on: push
 jobs:
   publish_pip:
     runs-on: ubuntu-latest
+    concurrency: pip-publish
     steps:
       - uses: actions/checkout@master
       - name: Set up Python 3.10
@@ -23,6 +24,7 @@ jobs:
           password: ${{ secrets.pypi_password }}
   aur-publish:
     runs-on: ubuntu-latest
+    concurrency: aur-publish
     steps:
       - uses: actions/checkout@v2
       - name: Publish AUR package
