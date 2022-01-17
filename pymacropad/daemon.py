@@ -1,10 +1,12 @@
 from enum import Enum
+from time import sleep
 from typing import Callable, List, Set
 
 import libevdev
 from os import path
 
 from libevdev import InputEvent
+from libevdev.device import DeviceGrabError
 
 
 class KeyState(Enum):
@@ -35,8 +37,13 @@ class Daemon:
 
     def start(self):
         while True:
-            if path.exists(self.device_path):
-                self._start_loop()
+            try:
+                if path.exists(self.device_path):
+                    self._start_loop()
+            except DeviceGrabError:
+                pass
+            print(f"Couldn't access {self.device_id}, waiting 5s...")
+            sleep(5)
 
 
     def _start_loop(self):
