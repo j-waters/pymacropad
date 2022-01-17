@@ -18,9 +18,13 @@ class KeyState(Enum):
 
 
 class KeyEvent:
-    def __init__(self, event: InputEvent, device_id: str):
-        self.key = event.code.name
-        self.state: KeyState = KeyState(event.value)
+    @classmethod
+    def from_event(cls, event: InputEvent, device_id: str):
+        return cls(event.code.name, KeyState(event.value), device_id)
+
+    def __init__(self, key: str, state: KeyState, device_id: str):
+        self.key = key
+        self.state = state
         self.device_id = device_id
 
 
@@ -52,7 +56,7 @@ class Daemon:
                     self._handle(event)
 
     def _handle(self, event: InputEvent):
-        key_event = KeyEvent(event, self.device_id)
+        key_event = KeyEvent.from_event(event, self.device_id)
         print(f"Handling key: {key_event.key}, state: {key_event.state}")
 
         for handler in self.handlers:
