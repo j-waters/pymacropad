@@ -1,7 +1,7 @@
 import os
 from pathlib import Path
 from shutil import copyfile
-from typing import Dict, TypeVar
+from typing import Dict, Generic, TypeVar
 
 import yaml
 from xdg import BaseDirectory
@@ -37,7 +37,7 @@ class KeyConfig:
 KC = TypeVar('KC', bound=KeyConfig)
 
 
-class Config:
+class Config(Generic[KC]):
     _key_configs: Dict[str, KC] = {}
     _device_id: str
     _last_modified: float = None
