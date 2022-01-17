@@ -25,7 +25,7 @@ class KeyConfig:
             self.held = data.get('held', None)
             self.up = data.get('up', None)
 
-    def get_command(self, state: str):
+    def get_command(self, state: KeyState):
         if state == KeyState.DOWN:
             return self.down
         if state == KeyState.HELD:

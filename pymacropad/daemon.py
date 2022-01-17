@@ -20,7 +20,7 @@ class KeyState(Enum):
 class KeyEvent:
     def __init__(self, event: InputEvent, device_id: str):
         self.key = event.code.name
-        self.state = KeyState(event.value)
+        self.state: KeyState = KeyState(event.value)
         self.device_id = device_id
 
 
