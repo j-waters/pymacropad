@@ -40,7 +40,7 @@ class Daemon:
             try:
                 if path.exists(self.device_path):
                     self._start_loop()
-            except DeviceGrabError:
+            except (DeviceGrabError, OSError):
                 pass
             print(f"Couldn't access {self.device_id}, waiting 5s...")
             sleep(5)
